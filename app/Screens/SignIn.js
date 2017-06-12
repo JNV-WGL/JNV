@@ -34,7 +34,9 @@ export default class SignIn extends Component {
             })
         })
             .then((response) => {
-                this.setState({message: JSON.parse(response._bodyText).message})
+                this.setState({message: JSON.parse(response._bodyText).message});
+                const { navigate } = this.props.navigation;
+                navigate('home');
             })
             .catch((error) => {
                 console.error(error);
