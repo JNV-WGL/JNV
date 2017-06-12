@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
-    View, TextInput, Button,
+    View, TextInput, Button,Alert
 } from 'react-native';
 
 
@@ -13,8 +13,10 @@ export default class HomeScreen extends Component{
 
     }
 
-
-    onSubmit = () => {
+    onSignUp = ()=>{
+        Alert.alert("Sign Up")
+    }
+    onSignIn = () => {
         // Alert.alert(this.state.text);
 
         return fetch('http://localhost:3000/login/', {
@@ -49,13 +51,14 @@ export default class HomeScreen extends Component{
                     <TextInput style={[styles.userText, {marginBottom: "5%"}]} password={true}
                                onChangeText={(password) => this.setState({password})} value={this.state.password}/>
                 </View>
+                <Text style={{color:"green"}}> {this.state.message}</Text>
                 <View style={styles.buttons}>
-                <Button style={styles.submit} onPress={this.onSubmit} color="red"
+                <Button style={styles.submit} onPress={this.onSignIn} color="red"
                         accessibilityLabel="See an informative alert" title={"Sign In"}/>
-                <Button style={styles.submit} onPress={this.onSubmit} color="red"
-                        accessibilityLabel="See an informative alert" title={"Sign Up"}/>
+                <Button style={styles.submit} onPress={this.onSignUp} color="red"
+                        accessibilityLabel="" title={"Sign Up"}/>
                 </View>
-                <Text> {this.state.message}</Text>
+
             </View>
 
         );

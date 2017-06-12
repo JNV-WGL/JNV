@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from 'react';
-import HomeScreen from './Screen Component/HomeScreen'
+import HomeScreen from './app/Screens/Home'
 import {
     AppRegistry,
 } from 'react-native';
