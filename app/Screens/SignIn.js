@@ -47,11 +47,11 @@ export default class SignIn extends Component {
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.loginText}>Login</Text>
                 <View>
-                    <TextInput style={styles.userText} onChangeText={(text) => this.setState({text})}
+                    <TextInput style={styles.userText} placeholder='User Name' onChangeText={(text) => this.setState({text})}
                                value={this.state.text}/>
                 </View>
                 <View>
-                    <TextInput style={[styles.userText, {marginBottom: "5%"}]} password={true}
+                    <TextInput style={[styles.userText, {marginBottom: "5%"}]} placeholder='Password' password={true}
                                onChangeText={(password) => this.setState({password})} value={this.state.password}/>
                 </View>
                 <Text style={{color: "green"}}> {this.state.message}</Text>
@@ -59,7 +59,7 @@ export default class SignIn extends Component {
                     <Button style={styles.submit} onPress={this.onSignIn} color="red"
                             accessibilityLabel="See an informative alert" title={"Sign In"}/>
                     <Button style={styles.submit} onPress={this.onSignUp} color="red"
-                            accessibilityLabel="" title={"Sign Up"}/>
+                            accessibilityLabel="See an informative alert" title={"Sign Up"}/>
                 </View>
 
             </View>
