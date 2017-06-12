@@ -2,22 +2,25 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
-    View, TextInput, Button,Alert
+    View, TextInput, Button, Alert
 } from 'react-native';
 
 
-export default class HomeScreen extends Component{
+export default class SignIn extends Component {
+    static navigationOptions = {
+        title: 'JNV-Mamnoor',
+    };
     constructor(props) {
         super(props);
-        this.state = {text: '', password: '',message:''};
+        this.state = {text: '', password: '', message: ''};
 
     }
 
-    onSignUp = ()=>{
-        Alert.alert("Sign Up")
-    }
+    onSignUp = () => {
+        const { navigate } = this.props.navigation;
+        navigate('signup');
+    };
     onSignIn = () => {
-        // Alert.alert(this.state.text);
 
         return fetch('http://localhost:3000/login/', {
             method: 'POST',
@@ -30,12 +33,12 @@ export default class HomeScreen extends Component{
                 password: this.state.password,
             })
         })
-            .then((response)=>{this.setState({message:JSON.parse(response._bodyText).message})})
+            .then((response) => {
+                this.setState({message: JSON.parse(response._bodyText).message})
+            })
             .catch((error) => {
                 console.error(error);
             });
-
-
     };
 
 
@@ -51,12 +54,12 @@ export default class HomeScreen extends Component{
                     <TextInput style={[styles.userText, {marginBottom: "5%"}]} password={true}
                                onChangeText={(password) => this.setState({password})} value={this.state.password}/>
                 </View>
-                <Text style={{color:"green"}}> {this.state.message}</Text>
+                <Text style={{color: "green"}}> {this.state.message}</Text>
                 <View style={styles.buttons}>
-                <Button style={styles.submit} onPress={this.onSignIn} color="red"
-                        accessibilityLabel="See an informative alert" title={"Sign In"}/>
-                <Button style={styles.submit} onPress={this.onSignUp} color="red"
-                        accessibilityLabel="" title={"Sign Up"}/>
+                    <Button style={styles.submit} onPress={this.onSignIn} color="red"
+                            accessibilityLabel="See an informative alert" title={"Sign In"}/>
+                    <Button style={styles.submit} onPress={this.onSignUp} color="red"
+                            accessibilityLabel="" title={"Sign Up"}/>
                 </View>
 
             </View>
@@ -78,9 +81,7 @@ const styles = StyleSheet.create({
         borderWidth: 1
 
     },
-    buttons:{
-
-
-        flexDirection:'row'
+    buttons: {
+        flexDirection: 'row'
     }
 });

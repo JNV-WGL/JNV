@@ -5,18 +5,13 @@
  */
 
 import React, {Component} from 'react';
-import HomeScreen from './app/Screens/Home'
+import {App} from './app/Main'
+
 import {
     AppRegistry,
 } from 'react-native';
 
 
-export default class JNV extends Component {
-    render(){
-        return (<HomeScreen/> );
-    }
-}
 
 
-
-AppRegistry.registerComponent('JNV', () => JNV);
+AppRegistry.registerComponent('JNV', () => App);
