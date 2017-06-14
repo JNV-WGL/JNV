@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 
-export default class SignIn extends Component {
+export default class SignIn extends Component{
     static navigationOptions = {
         title: 'JNV-Mamnoor',
     };
@@ -43,13 +43,12 @@ export default class SignIn extends Component {
             });
     };
 
-
     render() {
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.loginText}>Login</Text>
                 <View>
-                    <TextInput style={styles.userText} placeholder='User Name' onChangeText={(text) => this.setState({text})}
+                    <TextInput autoCapitalize='none' style={styles.userText} placeholder='User Name' onChangeText={(text) => this.setState({text})}
                                value={this.state.text}/>
                 </View>
                 <View>
