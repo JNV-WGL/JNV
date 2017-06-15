@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {
-    StyleSheet,
     Text,
-    View, TextInput, Button, Alert,AsyncStorage
+    View, Button,AsyncStorage
 } from 'react-native';
 import {NavigationActions} from "react-navigation";
 

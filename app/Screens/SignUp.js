@@ -17,7 +17,6 @@ export default class SignUp extends ValidationComponent {
                 dob:{date:'YYYY-MM-DD'},
                 class:{required:true},
                 password:{minlength:6},
-                confirmPassword:{minlength:6}
             });
         };
 
@@ -73,9 +72,9 @@ export default class SignUp extends ValidationComponent {
                                value={this.state.dob}/>
                     <TextInput ref='class' style={styles.userText} autoCapitalize='none' placeholder="Class" onChangeText={(section) => this.setState({section})}
                                value={this.state.section}/>
-                    <TextInput ref='password' style={styles.userText} autoCapitalize='none' placeholder="Password" onChangeText={(password) => this.setState({password})}
+                    <TextInput ref='password' style={styles.userText}  password={true} autoCapitalize='none' placeholder="Password" onChangeText={(password) => this.setState({password})}
                                value={this.state.password}/>
-                    <TextInput ref='confirmPassword' style={styles.userText} autoCapitalize='none' placeholder="Confirm Password" onChangeText={(confirmPassword) => this.setState({confirmPassword})} value={this.state.confirmPassword}/>
+                    <TextInput ref='confirmPassword' style={styles.userText}  password={true}  autoCapitalize='none' placeholder="Confirm Password" onChangeText={(confirmPassword) => this.setState({confirmPassword})} value={this.state.confirmPassword}/>
                 </View>
                 <Button onPress={this.onSubmit.bind(this)} color="red"
                         accessibilityLabel="See an informative alert" title={"Sign Up"}
