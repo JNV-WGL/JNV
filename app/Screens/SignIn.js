@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {
+    AsyncStorage,
     StyleSheet,
     Text,
-    View, TextInput, Button, Alert
+    View, TextInput, Button,
 } from 'react-native';
 
+const STORAGE_KEY="id_token";
 
 export default class SignIn extends Component{
     static navigationOptions = {
@@ -20,7 +22,7 @@ export default class SignIn extends Component{
         const { navigate } = this.props.navigation;
         navigate('signup');
     };
-    onSignIn = () => {
+     onSignIn = () => {
 
         return fetch('http://localhost:3000/login/', {
             method: 'POST',
@@ -32,16 +34,30 @@ export default class SignIn extends Component{
                 username: this.state.text,
                 password: this.state.password,
             })
-        })
-            .then((response) => {
-                this.setState({message: JSON.parse(response._bodyText).message});
-                const { navigate } = this.props.navigation;
-                navigate('home');
+        }).then((response)=> { return JSON.parse(response._bodyText)})
+            .then(async (response) =>{
+            let isValid=response.isAuthenticated;
+                if(isValid)
+                {
+                    try {
+                    await AsyncStorage.setItem(STORAGE_KEY, response.username);
+                        const { navigate } = this.props.navigation;
+                        navigate('home');
+                    } catch (error) {
+                        console.log('AsyncStorage error: ' + error.message);
+                        this.setState({message:'AsyncStorage error: ' + error.message});
+                    }
+
+                }
+                else{
+
+                    this.setState({message:"Invalid User Details!!!"});
+                }
             })
             .catch((error) => {
                 console.error(error);
             });
-    };
+    }   ;
 
     render() {
         return (

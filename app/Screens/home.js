@@ -2,16 +2,27 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
-    View, TextInput, Button, Alert
+    View, TextInput, Button, Alert,AsyncStorage
 } from 'react-native';
+import {NavigationActions} from "react-navigation";
 
 
+const STORAGE_KEY='id_token';
 export default class home extends Component {
-    onSignOut=()=>{
-        // Alert.alert("Hello");
-        const { navigate } = this.props.navigation;
-        navigate('signin');
-    };
+      onSignOut= async ()=> {
+          let value=await AsyncStorage.getItem(STORAGE_KEY);
+          if(value) {
+              await AsyncStorage.removeItem(STORAGE_KEY);
+              this.props
+                  .navigation
+                  .dispatch(NavigationActions.reset(
+                      {
+                          index: 0,
+                          actions: [
+                              NavigationActions.navigate({ routeName: 'signin'})
+                          ]
+                      }));
+          }    };
 
 
     render(){
