@@ -8,10 +8,16 @@ export default class SignUp extends ValidationComponent {
     };
     constructor(props) {
         super(props);
-        this.state = {username: '',rollno: '',name:'',dob:'',section:'',password:'',message:''};
+        this.state = {username: '',rollno: '',name:'',dob:'',section:'',password:'',confirmPassword:'',message:''};
         this.validateFields = ()=>{
             this.validate({
-                username:{required:true,minlength:7}
+                username:{required:true,minlength:7},
+                rollno:{required:true},
+                name:{required:true},
+                dob:{date:'YYYY-MM-DD'},
+                class:{required:true},
+                password:{minlength:6},
+                confirmPassword:{minlength:6}
             });
         };
 
@@ -19,8 +25,8 @@ export default class SignUp extends ValidationComponent {
     }
 
     onSubmit(){
-        this.validateFields()
-        if(this.errors.length==0){
+        this.validateFields();
+        if(this.errors.length===0 && this.passwordMatch()){
         return fetch('http://localhost:3000/signup/', {
             method: 'POST',
             headers: {
@@ -33,7 +39,8 @@ export default class SignUp extends ValidationComponent {
                 name: this.state.name,
                 dob: this.state.dob,
                 class: this.state.section,
-                password: this.state.password
+                password: this.state.password,
+                confirmPassword:this.state.confirmPassword
             })
         })
             .then((response) => {
@@ -43,7 +50,11 @@ export default class SignUp extends ValidationComponent {
                 console.error(error);
             });}
             else{
+            if(!this.passwordMatch()){
+            this.setState({message:this.getErrorMessages() + "Passwords are not matching"})}
+            else{
             this.setState({message:this.getErrorMessages()})
+            }
         }
     };
 
@@ -53,17 +64,18 @@ export default class SignUp extends ValidationComponent {
                 <View>
                     <TextInput ref='username' style={styles.userText} autoCapitalize='none' placeholder="User Name" onChangeText={(username) => this.setState({username})}
                                value={this.state.username} />
-                    <TextInput style={styles.userText} autoCapitalize='none' placeholder="Roll No" onChangeText={(rollno) => this.setState({rollno})}
+
+                    <TextInput ref='rollno' style={styles.userText} autoCapitalize='none' placeholder="Roll No" onChangeText={(rollno) => this.setState({rollno})}
                                value={this.state.rollno}/>
-                    <TextInput style={styles.userText} autoCapitalize='none' placeholder="Name" onChangeText={(name) => this.setState({name})}
+                    <TextInput ref='name' style={styles.userText} autoCapitalize='none' placeholder="Name" onChangeText={(name) => this.setState({name})}
                                value={this.state.name}/>
-                    <TextInput style={styles.userText} autoCapitalize='none' placeholder="Date Of Birth" onChangeText={(dob) => this.setState({dob})}
+                    <TextInput ref='dob' style={styles.userText} autoCapitalize='none' placeholder="YYYY-MM-DD" onChangeText={(dob) => this.setState({dob})}
                                value={this.state.dob}/>
-                    <TextInput style={styles.userText} autoCapitalize='none' placeholder="Class" onChangeText={(section) => this.setState({section})}
+                    <TextInput ref='class' style={styles.userText} autoCapitalize='none' placeholder="Class" onChangeText={(section) => this.setState({section})}
                                value={this.state.section}/>
-                    <TextInput style={styles.userText} autoCapitalize='none' placeholder="Password" onChangeText={(password) => this.setState({password})}
+                    <TextInput ref='password' style={styles.userText} autoCapitalize='none' placeholder="Password" onChangeText={(password) => this.setState({password})}
                                value={this.state.password}/>
-                    <TextInput style={styles.userText} autoCapitalize='none' placeholder="Confirm Password" />
+                    <TextInput ref='confirmPassword' style={styles.userText} autoCapitalize='none' placeholder="Confirm Password" onChangeText={(confirmPassword) => this.setState({confirmPassword})} value={this.state.confirmPassword}/>
                 </View>
                 <Button onPress={this.onSubmit.bind(this)} color="red"
                         accessibilityLabel="See an informative alert" title={"Sign Up"}
@@ -75,6 +87,10 @@ export default class SignUp extends ValidationComponent {
 
 
         );
+    }
+
+    passwordMatch() {
+        return this.state.password===this.state.confirmPassword;
     }
 }
 
