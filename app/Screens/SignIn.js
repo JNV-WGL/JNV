@@ -34,7 +34,7 @@ export default class SignIn extends Component{
                 username: this.state.text,
                 password: this.state.password,
             })
-        }).then((response)=> { return JSON.parse(response._bodyText)})
+        }).then((response)=>  response.json())
             .then(async (response) =>{
             let isValid=response.isAuthenticated;
                 if(isValid)
