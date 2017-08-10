@@ -32,6 +32,7 @@ export default class home extends Component {
     return(
         <View style={{flexDirection:'row',flexWrap:'wrap'}}>
             <Square name="attendance" screenName="attendance" onScreenChange={()=>this.onScreenChange} />
+            <Square name="Results" screenName="results" onScreenChange={()=>this.onScreenChange} />
             <Button  onPress={this.onSignOut} color="red" accessibilityLabel="See an informative alert" title={"Sign Out"}/>
         </View>
     );
