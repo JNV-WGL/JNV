@@ -24,14 +24,14 @@ export default class home extends Component {
                       }));
           }    };
 
-    onScreenChange=()=>{
+    onScreenChange=(page)=>{
         const {navigate} =this.props.navigation;
-        navigate('attendance');
+        navigate(page);
     };
     render(){
     return(
         <View style={{flexDirection:'row',flexWrap:'wrap'}}>
-            <Square name="attendance" onScreenChange={()=>this.onScreenChange.bind(this)} />
+            <Square name="attendance" screenName="attendance" onScreenChange={()=>this.onScreenChange} />
             <Button  onPress={this.onSignOut} color="red" accessibilityLabel="See an informative alert" title={"Sign Out"}/>
         </View>
     );

@@ -6,7 +6,7 @@ export default class Square extends Component{
 
     render(){
         return(
-            <TouchableOpacity onPress={this.props.onScreenChange()}>
+            <TouchableOpacity onPress={()=>this.props.onScreenChange()(this.props.screenName)}>
             <View style={{margin:10,borderRadius: 4,height:167,width:167,shadowOpacity:.20,shadowColor: "#000000",shadowRadius: 2,
                 shadowOffset: {
                     height: 1,
