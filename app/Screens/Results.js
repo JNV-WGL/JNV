@@ -5,10 +5,6 @@ import {
 
 
 export default class Attendance  extends Component{
-    static navigationOptions = {
-        title: 'Results',
-    };
-
     render(){
         return(
             <Text>Hello this is Results page

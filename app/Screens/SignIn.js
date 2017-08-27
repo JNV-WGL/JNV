@@ -9,9 +9,6 @@ import {
 const STORAGE_KEY="id_token";
 
 export default class SignIn extends Component{
-    static navigationOptions = {
-        title: 'JNV-Mamnoor',
-    };
     constructor(props) {
         super(props);
         this.state = {text: '', password: '', message: ''};

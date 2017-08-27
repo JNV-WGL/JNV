@@ -3,9 +3,6 @@ import {StyleSheet, View, Text, TextInput,Button,Alert} from "react-native";
 import  ValidationComponent  from 'react-native-form-validator';
 
 export default class SignUp extends ValidationComponent {
-    static navigationOptions = {
-        title: 'Sign Up',
-    };
     constructor(props) {
         super(props);
         this.state = {username: '',rollno: '',name:'',dob:'',section:'',password:'',confirmPassword:'',message:''};

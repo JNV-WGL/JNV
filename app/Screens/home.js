@@ -6,8 +6,7 @@ import {
 import {NavigationActions} from "react-navigation";
 import Square from '../components/Square'
 
-
-const STORAGE_KEY='id_token';
+export const STORAGE_KEY='id_token';
 export default class home extends Component {
       onSignOut= async ()=> {
           let value=await AsyncStorage.getItem(STORAGE_KEY);

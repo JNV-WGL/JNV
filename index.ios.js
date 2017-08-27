@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from 'react';
-import {App} from './app/Main'
+import App from './app/App'
 
 import {
     AppRegistry,
