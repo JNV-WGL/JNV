@@ -5,6 +5,7 @@ import {
     Text,
     View, TextInput, Button,
 } from 'react-native';
+import {NavigationActions} from "react-navigation";
 
 const STORAGE_KEY="id_token";
 
@@ -38,8 +39,15 @@ export default class SignIn extends Component{
                 {
                     try {
                     await AsyncStorage.setItem(STORAGE_KEY, response.username);
-                        const { navigate } = this.props.navigation;
-                        navigate('home');
+                        this.props
+                            .navigation
+                            .dispatch(NavigationActions.reset(
+                                {
+                                    index: 0,
+                                    actions: [
+                                        NavigationActions.navigate({ routeName: 'home'})
+                                    ]
+                                }));
                     } catch (error) {
                         console.log('AsyncStorage error: ' + error.message);
                         this.setState({message:'AsyncStorage error: ' + error.message});
